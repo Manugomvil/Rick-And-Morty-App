@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
 import Card from './components/Card';
-const api = new API()
 
 function App() {
   
