@@ -1,12 +1,19 @@
 import React, {useEffect, useState} from 'react';
 import '../Styles/Tarjetera.css';
 import {useHistory, useParams } from 'react-router-dom';
-import Personaje from '../components/Personaje';
 import Episodio from '../components/Episodio';
+import Loading from '../components/Loading';
 
 function Episodios() {
   const h = useHistory()
-  const [Episode, setEpisode] = useState([])
+  const [isError, setError] = useState(false)
+  const [isLoading, setLoading] = useState(true)
+  const [Episode, setEpisode] = useState({
+    name: '',
+    air_date:'',
+    episode:'',
+    characters:{length:''}
+  })
   var {id}= useParams();
   if(isNaN(id)) id = 1;
   id = parseInt(id)
@@ -20,11 +27,12 @@ function Episodios() {
       const response = await fetch(`https://rickandmortyapi.com/api/episode/${id}`)
       const data = await response.json()
       setEpisode(data)
+      setLoading(false)
     }catch(e){
-      
+      setError(e)
     }
   }
-  try{
+  if(isLoading) return <div className="Central"><Loading/></div>
     return (
         <div className="Central">
       <div className="Episodios">
@@ -34,15 +42,6 @@ function Episodios() {
     </div>
         </div>
   );
-}catch(e){
- return (
-    <div className="Central">
-        <div className="Episodios">
-            <Personaje name="Carta" nameCharacter="" status="" species="" type="" gender="" origin="" image=""/>
-        </div>
-    </div>
- )
-}
 function Adelante() {
   if(id<41){
     id++

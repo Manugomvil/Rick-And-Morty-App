@@ -7,7 +7,9 @@
   margin:0;
   background-color: #145e9c;
 }
-   
+.App ul{
+  padding: 0;
+}
 .App li {
 display: inline;
 }

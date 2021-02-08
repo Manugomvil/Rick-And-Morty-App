@@ -1,6 +1,7 @@
 import { BrowserRouter, Link, Route} from "react-router-dom";
-import Tarjetera from '../pages/Personajes';
+import Personajes from '../pages/Personajes';
 import Episodios from "../pages/Episodios";
+import CharacterNew from "../pages/NuevoPersonaje"
 import '../Styles/App.css';
 const App = () =>(
     <BrowserRouter>
@@ -8,9 +9,11 @@ const App = () =>(
             <ul>
                 <li><Link to={`/Personajes/1`}>Personajes</Link></li>
                 <li><Link to={`/Episodios/1`}>Episodios</Link></li>
+                <li><Link to={`/CharacterNew`}>Nuevo Personaje</Link></li>
             </ul>
-            <Route exact path="/Personajes/:id" component={Tarjetera}/>
+            <Route exact path="/Personajes/:id" component={Personajes}/>
             <Route exact path="/Episodios/:id" component={Episodios}/>
+            <Route exact path="/CharacterNew" component={CharacterNew}/>
         </div>
     </BrowserRouter>
 )
