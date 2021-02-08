@@ -36,12 +36,11 @@ function Episodios() {
   );
 }catch(e){
  return (
-  <div className="Episodios">
-  
-  <Personaje name="Carta" nameCharacter="" status="" species="" type=""
-          gender="" origin="" image=""/>
-</div>
-
+    <div className="Central">
+        <div className="Episodios">
+            <Personaje name="Carta" nameCharacter="" status="" species="" type="" gender="" origin="" image=""/>
+        </div>
+    </div>
  )
 }
 function Adelante() {

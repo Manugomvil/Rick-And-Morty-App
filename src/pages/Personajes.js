@@ -36,11 +36,12 @@ function Personajes() {
   );
 }catch(e){
  return (
-  <div className="Personajes">
-  
-  <Personaje name="Carta" nameCharacter="" status="" species="" type=""
+  <div className="Central">
+    <div className="Personajes">
+      <Personaje name="Carta" nameCharacter="" status="" species="" type=""
           gender="" origin="" image=""/>
-</div>
+    </div>
+  </div>
 
  )
 }
