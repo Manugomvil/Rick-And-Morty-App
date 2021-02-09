@@ -4,7 +4,7 @@ import {useHistory, useParams } from 'react-router-dom';
 import Personaje from '../components/Personaje';
 import Loading from '../components/Loading';
 
-function Personajes() {
+const Personajes = () =>{
   const h = useHistory()
   const [isError, setError] = useState(false)
   const [isLoading, setLoading] = useState(true)
@@ -26,7 +26,7 @@ function Personajes() {
   },[id])
   const obtenerDatos = async(id) => {
     try{
-
+      setLoading(true)
       const response = await fetch(`https://rickandmortyapi.com/api/character/${id}`)
       const data = await response.json()
       setCharacter(data)
@@ -40,8 +40,7 @@ function Personajes() {
       <div className="Central">
         <div className="Personajes">
       <button id="atras" className="btn-desplazamiento" onClick={Atras}></button>
-          <Personaje name="Carta" nameCharacter={Character.name} status={Character.status} species={Character.species} type={Character.type}
-          gender={Character.gender} origin={Character.origin.name} image={Character.image}/> 
+          <Personaje name="Carta" {...Character}/> 
       <button id="adelante" className="btn-desplazamiento" onClick={Adelante}></button>
           </div>
     </div>

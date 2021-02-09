@@ -55,8 +55,8 @@
   margin-top: 81px;
 }
 .btn-desplazamiento{
-  width: 200px;
-  height: 70px;
+  width: 70px;
+  height: 200px;
   border-style: double;
   border-color: #003333;
   background-repeat: no-repeat;
@@ -65,6 +65,7 @@
   background-size: inherit;
   margin: 0;
   padding: 0;
+  
 }
 .btn-desplazamiento:hover{
   background-color: #004c4a;

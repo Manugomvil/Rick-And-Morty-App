@@ -3,6 +3,7 @@ import Personajes from '../pages/Personajes';
 import Episodios from "../pages/Episodios";
 import CharacterNew from "../pages/NuevoPersonaje"
 import '../Styles/App.css';
+import Main from "../pages/Main";
 const App = () =>(
     <BrowserRouter>
         <div className="App">
@@ -14,6 +15,7 @@ const App = () =>(
             <Route exact path="/Personajes/:id" component={Personajes}/>
             <Route exact path="/Episodios/:id" component={Episodios}/>
             <Route exact path="/CharacterNew" component={CharacterNew}/>
+            <Route exact path="/" component={Main}/>
         </div>
     </BrowserRouter>
 )

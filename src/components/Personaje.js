@@ -1,6 +1,8 @@
 import React from 'react'
 import img from '../resources/MGV.png'
-const Personaje = (props)=>(
+const Personaje = (props)=>{
+    console.log(props)
+    return(
     <div id="Personaje" className="Personaje">  
         <div style={{  display: "flex", flexDirection: "column"}}>
             <div className="subcard">
@@ -16,10 +18,10 @@ const Personaje = (props)=>(
                     <h1 className="grid-item">Género: </h1>
                     <h1 className="grid-item">{props.gender}</h1>
                     <h1 className="grid-item gridAlterColor">Origen: </h1>
-                    <h1 className="grid-item gridAlterColor">{props.origin}</h1>
+                    <h1 className="grid-item gridAlterColor">{props.origin.name}</h1>
                 </div>
             </div>
         </div>
     </div>
-)
+)}
 export default Personaje

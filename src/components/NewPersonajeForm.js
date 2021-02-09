@@ -1,6 +1,6 @@
 import React from   'react'
 
-function NewPersonajeForm(props){
+const NewPersonajeForm = (props) =>{ 
 const {form, onChange} = props  
 const handleSubmitBtn = e =>{
     e.preventDefault()
