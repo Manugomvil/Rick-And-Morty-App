@@ -1,12 +1,11 @@
 import React from 'react'
 
 const Episodio = (props) => {
-    const {name,Episode} = props
+    const {Episode} = props
     return(
     <div id="Episodio" className="Episodio">
         <div style={{  display: "flex", flexDirection: "column"}}>
             <div className="subcard">
-                <div className="img-Character"/>
                 <h1 className="Character-name">{Episode.nameCharacter}</h1>
                 <div className="grid-container">
                     <h1 className="grid-item gridAlterColor">Fecha de lanzamiento: </h1>

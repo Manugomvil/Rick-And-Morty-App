@@ -1,40 +1,28 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import '../Styles/Tarjetera.css';
 import {useHistory, useParams } from 'react-router-dom';
 import Episodio from '../components/Episodio';
 import Loading from '../components/Loading';
+import useFetch from '../hooks/useFetch';
+import NotFound from './NotFound';
 
 const Episodios = () =>{
   const h = useHistory()
-  const [isError, setError] = useState(false)
-  const [isLoading, setLoading] = useState(false)
-  const [Episode, setEpisode] = useState({
+  var {id}= useParams();
+  if(isNaN(id)) id = 1;
+  id = parseInt(id)
+  
+  const{data:Episode,isLoading, isError} = useFetch(`https://rickandmortyapi.com/api/episode/${id}`,
+  {
     name: '',
     air_date:'',
     episode:'',
     characters:{length:''}
   })
-  var {id}= useParams();
-  if(isNaN(id)) id = 1;
-  id = parseInt(id)
-  
-  useEffect(()=>{
-    const obtenerDatos = async(id) => {
-      try{
-        setLoading(true)
-        const response = await fetch(`https://rickandmortyapi.com/api/episode/${id}`)
-        const data = await response.json()
-        setEpisode(data)
-        setLoading(false)
-      }catch(e){
-        //setLoading(false)
-        setError(e)
-      }
-    }
-    obtenerDatos(id)
-  },[id])
   
   if(isLoading) return <div className="Central"><Loading/></div>
+  if(isError) return <div className="Central"><NotFound/></div>
+
     return (
         <div className="Central">
       <div className="Episodios">

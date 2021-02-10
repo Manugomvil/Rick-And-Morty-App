@@ -1,62 +1,56 @@
-import React, {useEffect, useState} from 'react';
+import React, { Fragment } from 'react';
 import '../Styles/Tarjetera.css';
 import {useHistory, useParams } from 'react-router-dom';
 import Personaje from '../components/Personaje';
 import Loading from '../components/Loading';
+import useFetch from  '../hooks/useFetch';
+import { animateScroll as scroll} from 'react-scroll';
+import Paginacion from '../components/Paginacion';
+import NotFound from './NotFound';
 
 const Personajes = () =>{
   const h = useHistory()
-  const [isError, setError] = useState(false)
-  const [isLoading, setLoading] = useState(true)
-  const [Character, setCharacter] = useState({
-    name: '',
-    status: '',
-    species: '',
-    type: '',
-    gender: '',
-    origin: {name: ''},
-    image: ''
-  })
   var {id}= useParams();
   if(isNaN(id)) id = 1;
   id = parseInt(id)
-  
-  useEffect(()=>{
-    obtenerDatos(id)
-  },[id])
-  const obtenerDatos = async(id) => {
-    try{
-      setLoading(true)
-      const response = await fetch(`https://rickandmortyapi.com/api/character/${id}`)
-      const data = await response.json()
-      setCharacter(data)
-      setLoading(false)
-    }catch(e){
-      setError(true)
-    }
-  }
+  scroll.scrollToTop();
+  const{data,isLoading, isError} = useFetch(`https://rickandmortyapi.com/api/character/?page=${id}`,
+  {info:{},
+  result:{}})
   if(isLoading) return (<div className="Central"><Loading/></div>)
+  if(isError) return <div className="Central"><NotFound/></div>
+  try {
     return (
-      <div className="Central">
-        <div className="Personajes">
-      <button id="atras" className="btn-desplazamiento" onClick={Atras}></button>
-          <Personaje name="Carta" {...Character}/> 
-      <button id="adelante" className="btn-desplazamiento" onClick={Adelante}></button>
+        
+      <Fragment>
+        <Paginacion/>
+        <div className="Central">
+          <div className="Personajes">
+            <button id="atras" className="btn-desplazamiento" onClick={Atras}></button>
+            <div className="Grid">{
+              data.results.map((tarea, i) => (
+                <Personaje className="childGrid" key={tarea.id} {...tarea}/> 
+                ))
+              }</div>
+            <button id="adelante" className="btn-desplazamiento" onClick={Adelante}></button>
           </div>
-    </div>
-  );
+        </div>
+      </Fragment>
+    );
+  } catch (error) {
+    return <div className="Central"><NotFound/></div>
+  }
 function Adelante() {
-  if(id<671){
+  if(id<34){
     id++
     h.push(`/Personajes/${id}`)
-    //obtenerDatos(Id)
+    console.log(h)
   }
 }
 function Atras() {
   if(id>1){
     id--
     h.push(`/Personajes/${id}`)
-    //obtenerDatos(Id)
   }
 }
 }

@@ -19,8 +19,8 @@ const NewPersonaje = () =>{
         <div className="Central">
             <div className="Personajes">
                 <div className="colNewPersonaje">
-                <Personaje name="Carta" nameCharacter={form.Nombre} status={form.Estado} species={form.Especie} type={form.Tipo}
-          gender={form.Genero} origin={form.Origen} image={form.Img}/> 
+                <Personaje name={form.Nombre} status={form.Estado} species={form.Especie} type={form.Tipo}
+          gender={form.Genero} origin={{name:form.Origen}} image={form.Img}/> 
                 </div>
                 <div className="colNewPersonaje">
                     <PersonajeForm onChange= {handleChangeInput} form={form}/>
