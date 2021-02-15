@@ -1,8 +1,6 @@
 import React from 'react'
 
-const Episodio = (props) => {
-    const {Episode} = props
-    return(
+const Episodio = ({Episode}) => (
     <div id="Episodio" className="Episodio">
         <div style={{  display: "flex", flexDirection: "column"}}>
             <div className="subcard">
@@ -13,11 +11,10 @@ const Episodio = (props) => {
                     <h1 className="grid-item">Episodio: </h1>
                     <h1 className="grid-item">{Episode.episode}</h1>
                     <h1 className="grid-item gridAlterColor">Episodios: </h1>
-                    <h1 className="grid-item gridAlterColor">{Episode.characters.length}</h1>
+                    <h1 className="grid-item gridAlterColor">{Episode.characters?.length}</h1>
                 </div>
             </div>
         </div>
     </div>
     )
-}
 export default Episodio

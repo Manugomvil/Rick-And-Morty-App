@@ -23,6 +23,7 @@ display: inline;
     padding: 10px;
     background-color: #2175bc;
     color: #fff;
+    cursor: pointer;
     }
 
 .App li a:hover {
@@ -30,3 +31,4 @@ display: inline;
     margin-top: -2;
     padding-bottom: 12px;
     }
+    

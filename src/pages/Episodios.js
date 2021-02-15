@@ -1,10 +1,11 @@
 import React from 'react';
-import '../Styles/Tarjetera.css';
 import {useHistory, useParams } from 'react-router-dom';
 import Episodio from '../components/Episodio';
 import Loading from '../components/Loading';
 import useFetch from '../hooks/useFetch';
 import NotFound from './NotFound';
+import ApiUrl from '../config';
+import '../assets/style/components/Tarjetera.css';
 
 const Episodios = () =>{
   const h = useHistory()
@@ -12,13 +13,8 @@ const Episodios = () =>{
   if(isNaN(id)) id = 1;
   id = parseInt(id)
   
-  const{data:Episode,isLoading, isError} = useFetch(`https://rickandmortyapi.com/api/episode/${id}`,
-  {
-    name: '',
-    air_date:'',
-    episode:'',
-    characters:{length:''}
-  })
+  const{data:Episode,isLoading, isError} = useFetch(`${ApiUrl}/episode/${id}`,
+  [])
   
   if(isLoading) return <div className="Central"><Loading/></div>
   if(isError) return <div className="Central"><NotFound/></div>

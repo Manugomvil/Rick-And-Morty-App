@@ -1,5 +1,4 @@
-import React, { Fragment } from 'react';
-import '../Styles/Tarjetera.css';
+import React, { Fragment, useState } from 'react';
 import {useHistory, useParams } from 'react-router-dom';
 import Personaje from '../components/Personaje';
 import Loading from '../components/Loading';
@@ -7,6 +6,10 @@ import useFetch from  '../hooks/useFetch';
 import { animateScroll as scroll} from 'react-scroll';
 import Paginacion from '../components/Paginacion';
 import NotFound from './NotFound';
+import ApiUrl from '../config';
+import '../assets/style/components/Tarjetera.css';
+import Popup from '../components/PopUp';
+import EpisodiosList from '../components/EpisodiosList';
 
 const Personajes = () =>{
   const h = useHistory()
@@ -14,9 +17,18 @@ const Personajes = () =>{
   if(isNaN(id)) id = 1;
   id = parseInt(id)
   scroll.scrollToTop();
-  const{data,isLoading, isError} = useFetch(`https://rickandmortyapi.com/api/character/?page=${id}`,
-  {info:{},
-  result:{}})
+  console.log(`${ApiUrl}/character/?page=${id}`)
+  const{data,isLoading, isError} = useFetch(`${ApiUrl}/character/?page=${id}`,
+  [])
+  const [showPopup, setShowPopup] = useState(false);
+  const [dataPopUp, setDataPopUp] = useState({});
+  const HandlePopup = e => {
+    if(showPopup !== true){ 
+      let c = data.results.find(element => element.id === e.personaje.id)
+      setDataPopUp(c)
+    }
+      setShowPopup(!showPopup)
+  }
   if(isLoading) return (<div className="Central"><Loading/></div>)
   if(isError) return <div className="Central"><NotFound/></div>
   try {
@@ -27,10 +39,23 @@ const Personajes = () =>{
         <div className="Central">
           <div className="Personajes">
             <button id="atras" className="btn-desplazamiento" onClick={Atras}></button>
+            {showPopup ? 
+          <Popup
+            // children={<div>Hola</div>}
+            children={<EpisodiosList {...dataPopUp} onClick={() => HandlePopup({})}/> }
+            // children={<Personaje key={-1} className="childGrid" {...dataPopUp} onClick={() => HandlePopup({})}/> }
+            closePopup={HandlePopup}
+          />
+          : null
+        }
             <div className="Grid">{
-              data.results.map((tarea, i) => (
-                <Personaje className="childGrid" key={tarea.id} {...tarea}/> 
-                ))
+              data.results?.map((personaje, i) => {
+                return(
+                  <div key={personaje.id} className="childGrid">
+                    <Personaje  {...personaje} onClick={() => HandlePopup({personaje})}/> 
+                  </div>
+                )
+              })
               }</div>
             <button id="adelante" className="btn-desplazamiento" onClick={Adelante}></button>
           </div>
@@ -53,5 +78,6 @@ function Atras() {
     h.push(`/Personajes/${id}`)
   }
 }
+
 }
 export default Personajes;

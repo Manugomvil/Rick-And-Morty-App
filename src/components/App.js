@@ -2,10 +2,10 @@ import { BrowserRouter, Link, Route} from "react-router-dom";
 import Personajes from '../pages/Personajes';
 import Episodios from "../pages/Episodios";
 import CharacterNew from "../pages/NuevoPersonaje"
-import '../Styles/App.css';
 import Main from "../pages/Main";
 import React from "react";
 import Cabecera from "./Cabecera";
+import '../assets/style/App.css';
 
 const App = () => {
     
@@ -18,9 +18,9 @@ const App = () => {
         <BrowserRouter>
         <div className="App">
             <ul>
-                <li><Link to={`/Personajes/1`}>Personajes</Link></li>
-                <li><Link to={`/Episodios/1`}>Episodios</Link></li>
-                <li><Link to={`/CharacterNew`}>Nuevo Personaje</Link></li>
+                <li><Link className="App-li-a" to={`/Personajes/1`}>Personajes</Link></li>
+                <li><Link className="App-li-a" to={`/Episodios/1`}>Episodios</Link></li>
+                <li><Link className="App-li-a" to={`/CharacterNew`}>Nuevo Personaje</Link></li>
             </ul>
             <Cabecera/>
             <Route exact path="/Personajes/:id" component={Personajes}/>

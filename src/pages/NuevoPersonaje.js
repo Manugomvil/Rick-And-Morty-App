@@ -1,7 +1,7 @@
 import React, { useState } from   'react'
 import PersonajeForm from '../components/NewPersonajeForm'
 import Personaje from '../components/Personaje'
-import '../Styles/Tarjetera.css';
+import '../assets/style/components/Tarjetera.css';
 const NewPersonaje = () =>{
     const [form, setForm] = useState({
         Nombre:'',

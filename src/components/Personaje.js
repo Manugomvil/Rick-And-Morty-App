@@ -1,10 +1,9 @@
 import React from 'react'
-import img from '../resources/MGV.png'
-const Personaje = (props)=>{
-    return(
-    <div id="Personaje" className="Personaje">  
+import img from '../assets/resources/MGV.png'
+const Personaje = (props)=>(
+    <div id="Personaje" className="Personaje" onClick={props.onClick}>  
         <div style={{  display: "flex", flexDirection: "column"}}>
-            <div className="subcard">
+            <div id={props.id} className="subcard">
                 <img className="img-Character" src={props.image||img} alt={props.name}/>
                 <h1 className="Character-name">{props.name}</h1>
                 <div className="grid-container">
@@ -22,5 +21,5 @@ const Personaje = (props)=>{
             </div>
         </div>
     </div>
-)}
+)
 export default Personaje
