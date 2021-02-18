@@ -10,18 +10,20 @@ import ApiUrl from '../config';
 import '../assets/style/components/Tarjetera.css';
 import Popup from '../components/PopUp';
 import EpisodiosList from '../components/EpisodiosList';
+import classNames from 'classnames'
 
 const Personajes = () =>{
+  
   const h = useHistory()
   var {id}= useParams();
   if(isNaN(id)) id = 1;
   id = parseInt(id)
   scroll.scrollToTop();
-  console.log(`${ApiUrl}/character/?page=${id}`)
   const{data,isLoading, isError} = useFetch(`${ApiUrl}/character/?page=${id}`,
   [])
   const [showPopup, setShowPopup] = useState(false);
   const [dataPopUp, setDataPopUp] = useState({});
+  const headerClass = classNames({ childGrid: true }, { childGridAnimate: !showPopup })
   const HandlePopup = e => {
     if(showPopup !== true){ 
       let c = data.results.find(element => element.id === e.personaje.id)
@@ -51,7 +53,7 @@ const Personajes = () =>{
             <div className="Grid">{
               data.results?.map((personaje, i) => {
                 return(
-                  <div key={personaje.id} className="childGrid">
+                  <div key={personaje.id} className={headerClass}>
                     <Personaje  {...personaje} onClick={() => HandlePopup({personaje})}/> 
                   </div>
                 )
