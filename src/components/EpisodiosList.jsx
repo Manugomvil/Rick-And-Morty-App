@@ -1,6 +1,6 @@
 import React from 'react'
-import '../assets/style/components/Tarjetera.css'
-import img from '../assets/resources/MGV.png'
+import '../assets/styles/components/Tarjetera.css'
+import img from '../assets/statics/MGV.png'
 import { Link } from 'react-router-dom'
 const EpisodiosList = (props) => {
     return (

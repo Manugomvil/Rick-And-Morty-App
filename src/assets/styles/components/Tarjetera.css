@@ -9,6 +9,7 @@
   flex-direction: column;
 }
 .Grid{
+  padding:0 75px;
   display: grid;
   grid-template-columns: 33.33% 33.33% 33.33%
 }
@@ -16,9 +17,10 @@
   min-height:100%;
   min-width: 100%;
   background-color: #003333;
-  background-image: url("../../resources/fondo-02.svg");
+  /* background-image: url("../../statics/fondo-02.svg"); */
 }
 .Personajes, .Episodios {
+  position: relative;
   flex-direction: row;
   align-items: flex-start;
 }
@@ -74,6 +76,7 @@
   position: ab;
 }
 .btn-desplazamiento{
+  position: fixed;
   width: 70px;
   height: 200px;
   border-style: double;
@@ -90,10 +93,12 @@
   background-color: #004c4a;
 }
 #atras{
-  background-image: url(../../resources/btn-atras.png);
+  left: 0;
+  background-image: url(../../statics/btn-atras.png);
 }
 #adelante{
-  background-image: url(../../resources/btn-adelante.png);
+  right: 0;
+  background-image: url(../../statics/btn-adelante.png);
 }
 .Character-name{
   display: block;
@@ -136,4 +141,14 @@
   font-size: 40px;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   font-style: bold;
+}
+@media only screen and (max-width: 933px) {
+  .Grid {
+    grid-template-columns: 50% 50%;
+  }
+}
+@media only screen and (max-width: 550px) {
+  .Grid {
+    grid-template-columns: 100%;
+  }
 }

@@ -5,16 +5,18 @@ import Loading from '../components/Loading';
 import useFetch from '../hooks/useFetch';
 import NotFound from './NotFound';
 import ApiUrl from '../config';
-import '../assets/style/components/Tarjetera.css';
+import {connect} from 'react-redux'
+import {getAPIData} from '../Actions'
+import '../assets/styles/components/Tarjetera.css';
 
-const Episodios = () =>{
+const Episodios = (props) =>{
+  const {Episode,getAPIData} = props
   const h = useHistory()
   var {id}= useParams();
   if(isNaN(id)) id = 1;
   id = parseInt(id)
   
-  const{data:Episode,isLoading, isError} = useFetch(`${ApiUrl}/episode/${id}`,
-  [])
+  const{isLoading, isError} = useFetch(`${ApiUrl}/episode/${id}`,getAPIData)
   
   if(isLoading) return <div className="Central"><Loading/></div>
   if(isError) return <div className="Central"><NotFound/></div>
@@ -43,4 +45,10 @@ function Atras() {
   }
 }
 }
-export default Episodios;
+const mapStateToProps = state =>(
+  {Episode: state.data,}
+)
+const mapDispatchToProps = {
+  getAPIData
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Episodios);
