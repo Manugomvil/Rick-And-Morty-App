@@ -1,5 +1,5 @@
 import React from 'react';
-import {useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Episodio from '../components/Episodio';
 import Loading from '../components/Loading';
 import useFetch from '../hooks/useFetch';
@@ -11,7 +11,7 @@ import '../assets/styles/components/Tarjetera.css';
 
 const Episodios = (props) =>{
   const {Episode,getAPIData} = props
-  const h = useHistory()
+  const navigate = useNavigate()
   var {id}= useParams();
   if(isNaN(id)) id = 1;
   id = parseInt(id)
@@ -33,14 +33,14 @@ const Episodios = (props) =>{
 function Adelante() {
   if(id<41){
     id++
-    h.push(`/Episodios/${id}`)
+    navigate(`/Episodios/${id}`)
     //obtenerDatos(Id)
   }
 }
 function Atras() {
   if(id>1){
     id--
-    h.push(`/Episodios/${id}`)
+    navigate(`/Episodios/${id}`)
     //obtenerDatos(Id)
   }
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import {BrowserRouter, Route, Switch, Link} from 'react-router-dom'
+import {BrowserRouter, Route, Routes, Link} from 'react-router-dom'
 import Personajes from '../containers/Personajes'
 import Episodios from '../containers/Episodios'
 import CharacterNew from '../containers/NuevoPersonaje'
@@ -18,13 +18,13 @@ import '../assets/styles/App.css';
                     <li><Link className="App-li-a" to={`/CharacterNew`}>Nuevo Personaje</Link></li>
                 </ul>
                 <Layout>
-                    <Switch>
-                        <Route exact path="/Personajes/:id" component={Personajes}/>
-                        <Route exact path="/Episodios/:id" component={Episodios}/>
-                        <Route exact path="/CharacterNew" component={CharacterNew}/>
-                        <Route exact path="/" component={Home}/>
-                        <Route component={NotFound}></Route>
-                    </Switch>
+                <Routes>
+                    <Route exact path="/" element={<Home />} />
+                    <Route exact path="Personajes/:id" element={<Personajes />} />
+                    <Route exact path="Episodios/:id" element={<Episodios />} />
+                    <Route exact path="CharacterNew" element={<CharacterNew />} />
+                    <Route element={<NotFound />}></Route>
+                </Routes>
                 </Layout>
             </div>
         </BrowserRouter>

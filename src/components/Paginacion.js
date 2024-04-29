@@ -1,4 +1,4 @@
-import {useHistory, useParams} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import ReactPaginate from "react-paginate";
 import useFetch from "../hooks/useFetch";
 import {connect} from 'react-redux'
@@ -9,9 +9,9 @@ const Paginacion = (props) =>{
     const {pages, getPagesData} = props
     const {isLoading} = useFetch('https://rickandmortyapi.com/api/character/',getPagesData)
     var {id}= useParams();
-    const h = useHistory()
+    const navigate = useNavigate()
     function handlePageClick({ selected: selectedPage }) {
-        h.push(`/Personajes/${parseInt(selectedPage) + 1}`);
+        navigate(`/Personajes/${parseInt(selectedPage) + 1}`);
     }
     return(
         <ReactPaginate

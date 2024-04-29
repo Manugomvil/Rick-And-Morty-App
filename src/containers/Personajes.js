@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import {useHistory, useParams } from 'react-router-dom';
+import {useNavigate, useParams } from 'react-router-dom';
 import Personaje from '../components/Personaje';
 import Loading from '../components/Loading';
 import useFetch from  '../hooks/useFetch';
@@ -17,7 +17,7 @@ import Search from '../components/Search';
 
 const Personajes = (props) =>{
   const {getAPIData, result, searchData, isSearch} = props
-  const h = useHistory()
+  const navigate = useNavigate()
   var {id}= useParams();
   if(isNaN(id)) id = 1;
   id = parseInt(id)
@@ -38,7 +38,7 @@ const Personajes = (props) =>{
   if(isError) return <div className="Central"><NotFound/></div>
   var data = searchData?.length > 0?searchData:result
   return (
-    <Fragment>
+    <>
         <Search/>
         <div className="Central">
           <div className="Personajes">
@@ -61,20 +61,21 @@ const Personajes = (props) =>{
               : null
             }
           </div>
+          <div style={{height: 50}} />
         </div>
         <Paginacion/>
-      </Fragment>
+      </>
     );
     function Adelante() {
       if(id<34){
         id++
-        h.push(`/Personajes/${id}`)
+        navigate(`/Personajes/${id}`)
       }
     }
     function Atras() {
       if(id>1){
     id--
-    h.push(`/Personajes/${id}`)
+    navigate(`/Personajes/${id}`)
   }
 }
 
